@@ -16,8 +16,8 @@ RSpec.feature "User can find stations by zip code" do
       fill_in "zip", with: "80203"
       click_on "Locate"
 
-      expect(current_path).to eq "/search?zip=80203"
-      within("#station-3") do
+      expect(current_path).to eq "/search"
+      within("#station-1") do
         expect(page).to have_content "Name: Cultural Center Complex Garage"
         expect(page).to have_content "Address: 65 W 12th Ave, Denver, CO"
         expect(page).to have_content "Fuel types: ELEC"
