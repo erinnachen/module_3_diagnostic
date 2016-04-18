@@ -10,10 +10,11 @@ class StationService
     end
   end
 
-  def stations(zipcode)
+  def stations(zipcode, distance)
     response = connection.get do |req|
       req.url '/api/alt-fuel-stations/v1/nearest.json'
       req.params['location'] = zipcode
+      req.params['radius'] = distance
       req.params['fuel_type'] = "ELEC,LPG"
       req.params['limit'] = 10
     end

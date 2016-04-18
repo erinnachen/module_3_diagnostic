@@ -14,8 +14,8 @@ class Station
     "#{street_address}, #{city}, #{state}"
   end
 
-  def self.find(zipcode)
-    data = service.stations(zipcode)
+  def self.find(zipcode, distance)
+    data = service.stations(zipcode, distance)
     data.map { |station_data|
       Station.new(station_data)
     }
