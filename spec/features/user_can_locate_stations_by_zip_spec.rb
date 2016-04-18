@@ -13,16 +13,16 @@ RSpec.feature "User can find stations by zip code" do
   scenario "see stations for electrip and propane within 6 miles with info" do
     VCR.use_cassette "search_by_zipcode" do
       visit '/'
-      fill_in "q", with: "80203"
+      fill_in "zip", with: "80203"
       click_on "Locate"
 
-      #expect(current_path).to eq "/search?zip=80203"
-      within("#station-1") do
-        expect(page).to have_content "New name"
-        expect(page).to have_content "address"
-        expect(page).to have_content "ELectric"
-        expect(page).to have_content "1.5 miles"
-        expect(page).to have_content "Accessible within: 6am-10pm"
+      expect(current_path).to eq "/search?zip=80203"
+      within("#station-3") do
+        expect(page).to have_content "Name: Cultural Center Complex Garage"
+        expect(page).to have_content "Address: 65 W 12th Ave, Denver, CO"
+        expect(page).to have_content "Fuel types: ELEC"
+        expect(page).to have_content "Distance: 0.41801 miles"
+        expect(page).to have_content "Access times: Garage business hours; pay lot"
       end
     end
   end

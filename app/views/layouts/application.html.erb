@@ -19,9 +19,9 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <%= form_tag :search, method: :get, url: search_path(zip: :q) ,class: "form-inline" do %>
+          <%= form_tag search_path, zip: :zip, method: :get, class: "form-inline" do %>
             <div class="form-group search-field">
-              <%= text_field_tag :q, "Search by zip...", class: "form-control" %>
+              <%= text_field_tag :zip, "Search by zip...", class: "form-control" %>
               <%= submit_tag "Locate", class: "btn btn-primary" %>
             </div>
           <% end %>
