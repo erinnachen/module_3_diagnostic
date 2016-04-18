@@ -16,7 +16,9 @@ RSpec.feature "User can find stations by zip code" do
     fill_in "q", with: "80203"
     click_on "Locate"
 
-    expect(current_path).to eq "/search?zip=80203"
-    #end
+    #expect(current_path).to eq "/search?zip=80203"
+    within("stations") do
+      expect(station.first).to eq "something "
+    end
   end
 end
