@@ -11,14 +11,19 @@ require "rails_helper"
 
 RSpec.feature "User can find stations by zip code" do
   scenario "see stations for electrip and propane within 6 miles with info" do
-    #VCR.use_cassette "search_by_zipcode" do
-    visit '/'
-    fill_in "q", with: "80203"
-    click_on "Locate"
+    VCR.use_cassette "search_by_zipcode" do
+      visit '/'
+      fill_in "q", with: "80203"
+      click_on "Locate"
 
-    #expect(current_path).to eq "/search?zip=80203"
-    within("stations") do
-      expect(station.first).to eq "something "
+      #expect(current_path).to eq "/search?zip=80203"
+      within("#station-1") do
+        expect(page).to have_content "New name"
+        expect(page).to have_content "address"
+        expect(page).to have_content "ELectric"
+        expect(page).to have_content "1.5 miles"
+        expect(page).to have_content "Accessible within: 6am-10pm"
+      end
     end
   end
 end

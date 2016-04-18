@@ -1,6 +1,6 @@
 class StationService
   def initialize
-    @_connection = = Faraday.new(url: 'https://developer.nrel.gov/api/alt-fuel-stations/') do |conn|
+    @_connection = Faraday.new(url: 'https://developer.nrel.gov/api/alt-fuel-stations/') do |conn|
       conn.request  :url_encoded             # form-encode POST params
       conn.response :logger                  # log requests to STDOUT
       conn.adapter  Faraday.default_adapter  # make requests with Net::HTTP
@@ -10,7 +10,13 @@ class StationService
   end
 
   def stations(zipcode)
-
+    response = connection.get do |req|
+      req.url '/nearest.json'
+      req.params['location'] = zipcode
+      req.params['fuel_type'] = "ELEC"
+      req.params['limit'] = 10
+    end
+    binding.pry
   end
 
   private
